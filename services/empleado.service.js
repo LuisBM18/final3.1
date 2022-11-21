@@ -5,7 +5,7 @@ const boom = require("@hapi/boom");
 class EmpleadoService{
   constructor(){
     this.empleado= [];
-    this.GenerarDatos(3);
+    this.GenerarDatos(10);
   }
 
   GenerarDatos(limite) {
@@ -16,14 +16,18 @@ class EmpleadoService{
         apellido: faker.name.lastName(),
         edad: Math.floor(Math.random() * (30 - 1)) + 1,
         usuario: faker.internet.email(),
-        estaBloqueado: Math.random() < 0.75
+        estaBloqueado: Math.random() < 0.25
       });
     }
   }
 
-  async create(Empleado){
-    Empleado.id = crypto.randomUUID();
-    this.empleado.push(Empleado)
+  async create(data) {
+    const crearNuevoEmpleado ={
+      id : crypto.randomUUID(),
+      ...data
+    }
+    this.empleado.push(crearNuevoEmpleado);
+    return crearNuevoEmpleado;
   }
   async find(){
     return this.empleado;

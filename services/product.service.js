@@ -5,7 +5,7 @@ class productoService{
 
 constructor(){
   this.productos=[];
-  this.generate(3);
+  this.generate(10);
 }
 generate(limite){
   for (let index = 0;index<limite;index++){
@@ -18,9 +18,14 @@ generate(limite){
   }
 }
 
-async create(Producto){
-  Producto.id = crypto.randomUUID();
-  this.productos.push(Producto)
+async create(data){
+  const nuevoProducto = {
+    id: crypto.randomUUID(),
+    ...data
+  };
+  this.productos.push(nuevoProducto);
+  return nuevoProducto;
+
 }
 async find(){
   return this.productos;

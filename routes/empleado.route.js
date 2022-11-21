@@ -16,7 +16,9 @@ router.get('/',async (req, res, next)=>{
     }
   });
 
-router.get('/:id', controlValidar(findByEmpleadoSchema, 'params'), async (req,res, next)=>{
+router.get('/:id', 
+               controlValidar(findByEmpleadoSchema, 'params'),
+                async (req,res, next)=>{
   try {
     const { id } = req.params;
     const Empleado = await service.finfOne(id);
@@ -26,19 +28,24 @@ router.get('/:id', controlValidar(findByEmpleadoSchema, 'params'), async (req,re
   }
 });
 
-router.post('/', controlValidar(crearEmpleadoSchema, 'body'), async (req, res, next)=>{
+router.post('/', 
+              controlValidar(crearEmpleadoSchema, 'body'),
+               async (req, res, next)=>{
   try {
     const body = req.body;
-    const empleado = await service.create(body);
+    const crearNuevoEmpleado = await service.create(body);
     res.status(201).json({
       mensaje: 'registro exitoso',
-      datos: empleado
+      datos: crearNuevoEmpleado
     });
   } catch (error) {
     next(error)
   }
 });
-router.patch('/:id',controlValidar(findByEmpleadoSchema, 'params'), controlValidar(actualizarEmpleadoSchema, 'body'), async (req,res, next) => {
+router.patch('/:id',
+                 controlValidar(findByEmpleadoSchema, 'params'),
+                  controlValidar(actualizarEmpleadoSchema, 'body'), 
+                  async (req,res, next) => {
   try {
     const { id }= req.params;
       const body = req.body;
@@ -52,7 +59,9 @@ router.patch('/:id',controlValidar(findByEmpleadoSchema, 'params'), controlValid
   }
 });
 
-router.delete('/:id',controlValidar(findByEmpleadoSchema, 'params'), async (req,res, next)=> {
+router.delete('/:id',
+                  controlValidar(findByEmpleadoSchema, 'params'), 
+                  async (req,res, next)=> {
   try {
     const {id} = req.params;
     const EmpleadoEliminado = await service.delete(id);

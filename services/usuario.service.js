@@ -6,7 +6,7 @@ class UsuarioService{
 
 constructor(){
   this.Usuarios=[];
-  this.generate(3);
+  this.generate(10);
 }
 generate(limite){
   for (let index = 0;index<limite;index++){
@@ -18,9 +18,14 @@ generate(limite){
     });
   }
 }
-  async create(Usuario){
-    Usuario.id = crypto.randomUUID();
-    this.Usuarios.push(Usuario)
+  async create(data){
+    const nuevoUsuario = {
+      id: crypto.randomUUID(),
+      ...data
+    };
+    this.Usuarios.push(nuevoUsuario);
+    return nuevoUsuario;
+
   }
   async find(){
     return this.Usuarios;

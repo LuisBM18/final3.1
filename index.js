@@ -5,7 +5,7 @@ const { manejarError, mostrarError, boomManejarError } = require('./middlewares/
 
 const aplicacion = express();
 
-const port = 3500;
+const port = 3000;
 aplicacion.use(express.json());
 
 rutas(aplicacion);

@@ -15,7 +15,9 @@ router.get('/',async (req, res, next)=>{
     }
   });
 
-router.get('/:id', controlValidar(findByPedidoSchema, 'params'), async (req,res, next)=>{
+router.get('/:id', 
+                  controlValidar(findByPedidoSchema, 'params'),
+                   async (req,res, next)=>{
   try {
     const { id } = req.params;
     const Pedido = await service.finfOne(id);
@@ -25,19 +27,24 @@ router.get('/:id', controlValidar(findByPedidoSchema, 'params'), async (req,res,
   }
 });
 
-router.post('/', controlValidar(crearPedidoSchema, 'body'), async (req, res, next)=>{
+router.post('/', 
+                controlValidar(crearPedidoSchema, 'body'),
+                 async (req, res, next)=>{
   try {
     const body = req.body;
-    const pedido = await service.create(body);
+    const crearNuevoPedido = await service.create(body);
     res.status(201).json({
       mensaje: 'registro exitoso',
-      datos: pedido
+      datos: crearNuevoPedido
     });
   } catch (error) {
     next(error)
   }
 });
-router.patch('/:id',controlValidar(findByPedidoSchema, 'params'), controlValidar(actualizarPedidoSchema, 'body'), async (req,res, next) => {
+router.patch('/:id',
+               controlValidar(findByPedidoSchema, 'params'),
+                controlValidar(actualizarPedidoSchema, 'body'), 
+                async (req,res, next) => {
   try {
     const { id }= req.params;
       const body = req.body;
@@ -51,7 +58,9 @@ router.patch('/:id',controlValidar(findByPedidoSchema, 'params'), controlValidar
   }
 });
 
-router.delete('/:id',controlValidar(findByPedidoSchema, 'params'), async (req,res, next)=> {
+router.delete('/:id',
+                controlValidar(findByPedidoSchema, 'params'), 
+                async (req,res, next)=> {
   try {
     const {id} = req.params;
     const PedidoEliminado = await service.delete(id);
