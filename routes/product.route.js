@@ -14,7 +14,9 @@ router.get('/',async (req, res, next)=>{
     }
   });
 
-router.get('/:id', controlValidar(findByProductoSchema, 'params'), async (req,res, next)=>{
+router.get('/:id', 
+                 controlValidar(findByProductoSchema, 'params'), 
+                async (req,res, next)=>{
   try {
     const { id } = req.params;
     const Producto = await service.finfOne(id);
