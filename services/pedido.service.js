@@ -16,7 +16,7 @@ class PedidoService{
         estado: "Por entregar",
         condicion: "Delivery",
         precioTotal: faker.datatype.number(),
-        estaBloqueado: Math.random() < 0.75
+        estaBloqueado: Math.random() < 0.25
       });
     }
   }

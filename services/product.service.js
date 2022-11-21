@@ -13,7 +13,7 @@ generate(limite){
       id:crypto.randomUUID(),
       nombre:'producto'+index,
       precio: 10 + Math.floor(Math.random()*190),
-      estaBloqueado: Math.random() < 0.75
+      estaBloqueado: Math.random() < 0.25
     });
   }
 }

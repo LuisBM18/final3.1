@@ -14,7 +14,7 @@ generate(limite){
       id:crypto.randomUUID(),
       Correo: faker.internet.email(),
       Password:faker.internet.password(),
-      estaBloqueado: Math.random() < 0.75
+      estaBloqueado: Math.random() < 0.25
     });
   }
 }
