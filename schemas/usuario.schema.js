@@ -2,7 +2,7 @@ const Joi = require('joi')
 
 const id = Joi.string().uuid()
 const Correo = Joi.string().email();
-const Password = Joi.string().min(1).max(30);
+const Password = Joi.string().min(1).max(10);
 
 const crearUsuarioSchema = Joi.object({
   cliente: Correo.required(),
