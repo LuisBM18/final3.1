@@ -14,9 +14,7 @@ router.get('/',async (req, res, next)=>{
     }
   });
 
-router.get('/:id', 
-            controlValidar(findByUsuarioSchema, 'params'), 
-            async (req,res, next)=>{
+router.get('/:id', controlValidar(findByUsuarioSchema, 'params'), async (req,res, next)=>{
   try {
     const { id } = req.params;
     const Usuario = await service.finfOne(id);
@@ -26,24 +24,19 @@ router.get('/:id',
   }
 });
 
-router.post('/', 
-              controlValidar(crearUsuarioSchema, 'body'), 
-              async (req, res, next)=>{
+router.post('/', controlValidar(crearUsuarioSchema, 'body'), async (req, res, next)=>{
   try {
     const body = req.body;
-    const nuevoUsuario = await service.create(body);
+    const usuario = await service.create(body);
     res.status(201).json({
       mensaje: 'registro exitoso',
-      datos: nuevoUsuario
+      datos: usuario
     });
   } catch (error) {
     next(error)
   }
 });
-router.patch('/:id',
-              controlValidar(findByUsuarioSchema, 'params'),
-               controlValidar(actualizarUsuarioSchema, 'body'), 
-               async (req,res, next) => {
+router.patch('/:id',controlValidar(findByUsuarioSchema, 'params'), controlValidar(actualizarUsuarioSchema, 'body'), async (req,res, next) => {
   try {
     const { id }= req.params;
       const body = req.body;
@@ -57,9 +50,7 @@ router.patch('/:id',
   }
 });
 
-router.delete('/:id',
-                  controlValidar(findByUsuarioSchema, 'params'), 
-                  async (req,res, next)=> {
+router.delete('/:id',controlValidar(findByUsuarioSchema, 'params'), async (req,res, next)=> {
   try {
     const {id} = req.params;
     const UsuarioEliminado = await service.delete(id);

@@ -6,7 +6,7 @@ class UsuarioService{
 
 constructor(){
   this.Usuarios=[];
-  this.generate(10);
+  this.generate(3);
 }
 generate(limite){
   for (let index = 0;index<limite;index++){
@@ -14,18 +14,13 @@ generate(limite){
       id:crypto.randomUUID(),
       Correo: faker.internet.email(),
       Password:faker.internet.password(),
-      estaBloqueado: Math.random() < 0.25
+      estaBloqueado: Math.random() < 0.75
     });
   }
 }
-  async create(data){
-    const nuevoUsuario = {
-      id: crypto.randomUUID(),
-      ...data
-    };
-    this.Usuarios.push(nuevoUsuario);
-    return nuevoUsuario;
-
+  async create(Usuario){
+    Usuario.id = crypto.randomUUID();
+    this.Usuarios.push(Usuario)
   }
   async find(){
     return this.Usuarios;

@@ -14,9 +14,7 @@ router.get('/',async (req, res, next)=>{
     }
   });
 
-router.get('/:id', 
-                 controlValidar(findByProductoSchema, 'params'), 
-                async (req,res, next)=>{
+router.get('/:id', controlValidar(findByProductoSchema, 'params'), async (req,res, next)=>{
   try {
     const { id } = req.params;
     const Producto = await service.finfOne(id);
@@ -26,24 +24,19 @@ router.get('/:id',
   }
 });
 
-router.post('/', 
-                controlValidar(crearProductoSchema, 'body'), 
-                async (req, res, next)=>{
+router.post('/', controlValidar(crearProductoSchema, 'body'), async (req, res, next)=>{
   try {
     const body = req.body;
-    const nuevoProducto = await service.create(body);
+    const NuevoProducto = await service.create(body);
     res.status(201).json({
       mensaje: 'registro exitoso',
-      datos: nuevoProducto
+      datos: NuevoProducto
     });
   } catch (error) {
     next(error)
   }
 });
-router.patch('/:id',
-                   controlValidar(findByProductoSchema, 'params'),
-                    controlValidar(actualizarProductoSchema, 'body'),
-                     async (req,res, next) => {
+router.patch('/:id',controlValidar(findByProductoSchema, 'params'), controlValidar(actualizarProductoSchema, 'body'), async (req,res, next) => {
   try {
     const { id }= req.params;
       const body = req.body;
@@ -57,9 +50,7 @@ router.patch('/:id',
   }
 });
 
-router.delete('/:id',
-                     controlValidar(findByProductoSchema, 'params'), 
-                     async (req,res, next)=> {
+router.delete('/:id',controlValidar(findByProductoSchema, 'params'), async (req,res, next)=> {
   try {
     const {id} = req.params;
     const ProductoEliminado = await service.delete(id);

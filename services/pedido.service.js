@@ -5,7 +5,7 @@ const boom = require("@hapi/boom");
 class PedidoService{
   constructor(){
     this.pedido= [];
-    this.GenerarDatos(10);
+    this.GenerarDatos(3);
   }
 
   GenerarDatos(limite) {
@@ -16,18 +16,14 @@ class PedidoService{
         estado: "Por entregar",
         condicion: "Delivery",
         precioTotal: faker.datatype.number(),
-        estaBloqueado: Math.random() < 0.25
+        estaBloqueado: Math.random() < 0.75
       });
     }
   }
 
-  async create(data) {
-    const crearNuevoPedido ={
-      id : crypto.randomUUID(),
-      ...data
-    }
-    this.empleado.push(crearNuevoPedido);
-    return crearNuevoPedido;
+  async create(Pedido){
+    Pedido.id = crypto.randomUUID();
+    this.pedido.push(Pedido)
   }
   async find(){
     return this.pedido;

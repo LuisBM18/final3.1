@@ -5,7 +5,7 @@ class productoService{
 
 constructor(){
   this.productos=[];
-  this.generate(10);
+  this.generate(3);
 }
 generate(limite){
   for (let index = 0;index<limite;index++){
@@ -13,19 +13,14 @@ generate(limite){
       id:crypto.randomUUID(),
       nombre:'producto'+index,
       precio: 10 + Math.floor(Math.random()*190),
-      estaBloqueado: Math.random() < 0.25
+      estaBloqueado: Math.random() < 0.75
     });
   }
 }
 
-async create(data){
-  const nuevoProducto = {
-    id: crypto.randomUUID(),
-    ...data
-  };
-  this.productos.push(nuevoProducto);
-  return nuevoProducto;
-
+async create(Producto){
+  Producto.id = crypto.randomUUID();
+  this.productos.push(Producto)
 }
 async find(){
   return this.productos;
